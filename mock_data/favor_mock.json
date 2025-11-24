@@ -1,0 +1,7 @@
+{
+  "variant_id": "rs429358",
+  "gene": "APOE",
+  "annotation_score": 0.97,
+  "consequence": "missense_variant",
+  "impact": "high"
+}
