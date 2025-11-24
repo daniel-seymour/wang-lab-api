@@ -110,7 +110,6 @@ c. Display: Print to console first → then return as JSON (FastAPI) or table (S
 d. Polish: Add error handling (“variant not found”) and a clean README.
 
 
-
 ### 💡 Bonus Features (Optional)
 These bonus sections help assess strong API developers.
 
