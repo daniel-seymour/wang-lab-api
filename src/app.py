@@ -1,9 +1,11 @@
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent))
+
 from data_viz import create_population_frequency_chart, create_eqtl_heatmap, create_functional_annotation_landscape
 from fetch_data import fetch_favor, fetch_gtex
 from merge_api import merge_variant_data, export_to_json, export_to_csv
@@ -69,8 +71,6 @@ with tab1:
             st.success("✅ Data fetching complete!")
 
         # ========== DISPLAY RAW DATA TABLES ==========
-
-        # FAVOR Table
         if favor_data:
             favor_df = pd.DataFrame(favor_data)
             with st.expander("📘 FAVOR Annotation Table (Click to expand)"):
@@ -78,7 +78,6 @@ with tab1:
         else:
             st.warning("⚠️ No FAVOR results found.")
 
-        # GTEx Table (right after FAVOR)
         if GTEx_data and "eqtl_results" in GTEx_data:
             gtex_df = pd.DataFrame(GTEx_data["eqtl_results"])
             with st.expander("🧫 GTEx eQTL Results Table (Click to expand)"):
@@ -99,7 +98,6 @@ with tab1:
             fig2 = create_functional_annotation_landscape(favor_df, variant_id)
             st.plotly_chart(fig2, use_container_width=True)
 
-        # eQTL Heatmap
         if GTEx_data:
             fig = create_eqtl_heatmap(GTEx_data, variant_id)
             if fig:

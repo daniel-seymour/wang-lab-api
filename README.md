@@ -7,7 +7,7 @@ Video Demo: Check Github Releases
 
 ## APIs
 
-This app integrates three genomics APIs:
+This app integrates three genomics APIs from two providers.
 
 ### FAVOR (Functional Annotation of Variants Online Resource)
 Aggregates 50+ annotation tracks including pathogenicity predictors, conservation scores, and population frequencies.
