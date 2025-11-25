@@ -1,27 +1,27 @@
 # 🧩 Take-Home Challenge: Genetic Data Explorer (API Integration & Minimal App)
-**Duration:** 24 hours  
-**Primary Skills:** REST API design, data integration, lightweight app development (Streamlit or FastAPI)  
+**Duration:** 24 hours
+**Primary Skills:** REST API design, data integration, lightweight app development (Streamlit or FastAPI)
 **Cost Goal:** Zero or near-zero (public APIs only, no paid tools)
 
 ---
 
 ## 🧭 Context
-Our lab builds data systems to organize and explore large-scale human genetics information.  
-For this assignment, you do **not** need prior biology knowledge — treat genetic data as structured fields (e.g., *variant ID*, *gene name*, *annotation score*).  
+Our lab builds data systems to organize and explore large-scale human genetics information.
+For this assignment, you do **not** need prior biology knowledge — treat genetic data as structured fields (e.g., *variant ID*, *gene name*, *annotation score*).
 
-The goal is to show that you can:  
-1. **Retrieve and combine data** from public REST APIs,  
-2. **Expose or visualize** that combined information through your own simple API or dashboard, and  
+The goal is to show that you can:
+1. **Retrieve and combine data** from public REST APIs,
+2. **Expose or visualize** that combined information through your own simple API or dashboard, and
 3. **Document and reason** about your design clearly.
 
 ---
 
 ## 🎯 Goal
-Create a **lightweight data explorer** or **REST API service** that retrieves and displays information about one or more *identifiers* (for example, “variant ID” or “gene symbol”).  
+Create a **lightweight data explorer** or **REST API service** that retrieves and displays information about one or more *identifiers* (for example, “variant ID” or “gene symbol”).
 
-You can use any one or more of the following example APIs (or mock data if offline):  
-- **FAVOR API** – Functional Annotation of Variants Online   https://docs.genohub.org/pagination 
-- **GTEx API** – Gene expression information  https://gtexportal.org/api/v2/redoc 
+You can use any one or more of the following example APIs (or mock data if offline):
+- **FAVOR API** – Functional Annotation of Variants Online   https://docs.genohub.org/pagination
+- **GTEx API** – Gene expression information  https://gtexportal.org/api/v2/redoc
 - **AlphaGenome API** – Variant and functional annotations   https://github.com/google-deepmind/alphagenome
 
 ---
@@ -29,7 +29,7 @@ You can use any one or more of the following example APIs (or mock data if offli
 ## 🧩 A. Starter Dataset
 You can use any of the publications listed in the https://advp.niagads.org/publications instead of creating your own.  You can leverage search function in ADVP https://advp.niagads.org/search to get a list of relationship, e.g. a record of col "SNP" rs3865444 is within the "Locus" CD33 and you can show us how you get the API calls from the above.
 
-Alternatively, you can use these mock examples below: 
+Alternatively, you can use these mock examples below:
 
 
 ### 🧬 `favor_mock.json`
@@ -59,9 +59,9 @@ Choose **one** of the two main paths:
 
 ### 🧠 Option A: REST API Developer
 Build a minimal REST API using **FastAPI** (or Flask) that provides endpoints like:
-- `GET /variant/{id}` → retrieves variant info from at least 2 APIs and merges results.  
-- `GET /gene/{symbol}` → optional secondary endpoint.  
-- Include at least one query parameter (e.g., `?tissue=brain` or `?fields=annotations`).  
+- `GET /variant/{id}` → retrieves variant info from at least 2 APIs and merges results.
+- `GET /gene/{symbol}` → optional secondary endpoint.
+- Include at least one query parameter (e.g., `?tissue=brain` or `?fields=annotations`).
 
 Example merged JSON output:
 ```json
@@ -94,13 +94,13 @@ Build a small Streamlit (or Gradio/Flask) app that:
 - pytest, requests-mock for testing (optional)
 
 2. Example Setup
-```bash 
+```bash
 pip install fastapi uvicorn streamlit requests pandas
 ```
 
 3. Minimal Workflow
 a. Read mock data:
-``` python 
+``` python
 import json
 favor = json.load(open("mock_data/favor_mock.json"))
 GTEx = json.load(open("mock_data/GTEx_mock.json"))
