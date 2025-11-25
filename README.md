@@ -33,8 +33,8 @@ Expression quantitative trait loci (eQTL) data across 54 human tissues from ~1,0
 The motivation for tjevisualizations logic is due to the natural sequence of steps startnig at Population Frequencies, going to Pathogenicity Scores and finally eQTL Effects.
 
 ## Bonus Features:
-1. Testing
-2. Help tab on Streamlit App
+1. Testing using PyTest
+2. A Help tab on Streamlit App
 
 How to install on computer:
 1.
