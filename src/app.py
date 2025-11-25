@@ -1,13 +1,15 @@
 import streamlit as st
-import requests
-import json
 import pandas as pd
-from fetch_data import fetch_favor, fetch_gtex
-from merge_api import merge_variant_data
-from dotenv import load_dotenv
-import os
 import plotly.express as px
-from src.data_viz import create_population_frequency_chart, create_eqtl_heatmap, create_functional_annotation_landscape
+import sys
+from pathlib import Path
+
+from data_viz import create_population_frequency_chart, create_eqtl_heatmap, create_functional_annotation_landscape
+from fetch_data import fetch_favor, fetch_gtex
+from merge_api import merge_variant_data, export_to_json, export_to_csv
+
+
+sys.path.insert(0, str(Path(__file__).parent))
 
 st.set_page_config(layout="wide")
 
@@ -105,26 +107,96 @@ with tab1:
                 st.markdown("#### 🔬 eQTL Effect Heatmap")
                 st.plotly_chart(fig, use_container_width=True)
 
+        if favor_data or GTEx_data:
+            st.subheader("📥 Export Data")
+            merged = merge_variant_data(favor_data, GTEx_data, variant_id)
+
+            col1, col2 = st.columns(2)
+            with col1:
+                st.download_button("⬇️ JSON", export_to_json(merged),
+                                f"{variant_id}.json", "application/json")
+            with col2:
+                st.download_button("⬇️ CSV", export_to_csv(merged),
+                                f"{variant_id}.csv", "text/csv")
+
+            st.caption("💡 CSV uses tidy format: one row per eQTL association, with annotation data repeated. "
+                    "JSON preserves the nested structure.")
+
 
 with tab2:
     st.header("Help & Documentation")
+
     st.markdown("""
     ### What is this tool?
-    This app allows you to explore genetic variants using multiple databases:
-    - **FAVOR**: Functional annotation and pathogenicity predictions
-    - **GTEx**: Expression quantitative trait loci (eQTL) data
+    A variant annotation explorer that integrates multiple genomics databases to provide
+    functional predictions, population frequencies, and expression data for genetic variants.
 
-    ### How to use:
-    1. Enter an rsID (e.g., rs429358 for APOE ε4)
-    2. Click "Search"
-    3. View functional annotations and population frequencies
+    ---
 
-    ### Understanding the results:
-    - **CADD score**: Higher = more deleterious (>20 is pathogenic)
-    - **Allele frequency**: % of population carrying this variant
-    - **eQTL**: Variants affecting gene expression
+    ### Data Sources
 
-    ### Example variants:
-    - `rs429358` - APOE ε4 (Alzheimer's risk)
-    - `rs7412` - APOE ε2 (protective)
+    | Database | Description | Key Fields |
+    |----------|-------------|------------|
+    | **[FAVOR](https://favor.genohub.org/)** | Functional Annotation of Variants Online Resource from Harvard/WUSTL. Aggregates 50+ annotation tracks including pathogenicity predictors, conservation scores, and population frequencies from gnomAD. | CADD, SIFT, PolyPhen2, AlphaMissense, ClinVar |
+    | **[GTEx](https://gtexportal.org/)** | Genotype-Tissue Expression project (NIH). Maps expression quantitative trait loci (eQTLs) across 54 human tissues from ~1000 donors. | Tissue, effect size (NES), p-value |
+
+    ---
+
+    ### Visualizations
+
+    **Population Allele Frequencies:**
+    Compares variant frequency across global populations (gnomAD). Large differences may indicate
+    population-specific selection or drift. Common variants (>1%) are unlikely to cause severe
+    Mendelian disease.
+
+    **Pathogenicity Assessment:**
+    Normalized scores from multiple predictors. Note that predictors measure different things:
+    - **SIFT/PolyPhen2/AlphaMissense**: Protein structure/function impact
+    - **GERP++/MutationTaster**: Evolutionary conservation
+    - **CADD**: Integrative deleteriousness score
+
+    ⚠️ *Discordant predictions are common and biologically meaningful.* A variant can be
+    "tolerated" by structure predictors yet highly conserved—this pattern often indicates
+    functional effects beyond simple protein disruption (e.g., altered binding affinity,
+    tissue-specific regulation).
+
+    **🔬 eQTL Heatmap**
+    Shows tissues where the variant significantly affects gene expression. Normalized Effect
+    Size (NES) indicates direction: positive = increased expression with alt allele,
+    negative = decreased.
+
+    ---
+
+    ### Interpreting Key Scores
+
+    | Score | Benign | Uncertain | Pathogenic |
+    |-------|--------|-----------|------------|
+    | CADD (phred) | <15 | 15-20 | >20 |
+    | SIFT | >0.05 | 0.05 | <0.05 |
+    | PolyPhen2 | <0.45 | 0.45-0.85 | >0.85 |
+    | AlphaMissense | <0.34 | 0.34-0.56 | >0.56 |
+    | GERP++ | <2 | 2-4 | >4 (conserved) |
+
+    ---
+
+    ### Export Formats
+
+    | Format | Structure | Best For |
+    |--------|-----------|----------|
+    | **JSON** | Nested hierarchy | Programmatic access, preserves all relationships |
+    | **CSV** | Tidy/long format (1 row per eQTL) | Excel, R, pandas—annotation columns repeat per eQTL |
+
+    ---
+
+    ### Example Variants
+
+    | rsID | Gene | Clinical Relevance |
+    |------|------|-------------------|
+    | `rs429358` | APOE | ε4 allele — strongest genetic risk factor for Alzheimer's |
+    | `rs7412` | APOE | ε2 allele — protective against Alzheimer's |
+    | `rs1801133` | MTHFR | C677T — folate metabolism, homocysteine levels |
+    | `rs334` | HBB | Sickle cell variant (HbS) |
+    | `rs12913832` | HERC2 | Blue/brown eye color determinant |
+
+    ---
     """)

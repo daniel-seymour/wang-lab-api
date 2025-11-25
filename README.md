@@ -1,29 +1,4 @@
-## Installation
-
-1. Clone the repository
-2. Create a virtual environment: `python -m venv venv` NOT CORRECT
-3. Activate it: `source venv/bin/activate` (macOS/Linux) or `venv\Scripts\activate` (Windows)
-4. Install dependencies: `pip install -r requirements.txt`
-
-## Running
-
-[Add your specific commands here - e.g.:]
-- Backend API: `uvicorn app:app --reload`
-- Frontend: `streamlit run app.py` NOT CORRECT
-
-README.md including:
-        - Which APIs you used or mocked
-        - Example commands and screenshots
-        - Brief explanation of your data model or visualization logic
-        - Bonus features (if implemented)
-    - (Optional) short demo video/gif (provide link)
-
-
-Final check:
-clone repo and try again to see if
-
-## Setup
-
+## How to run the app
 1. Clone the repository
 2. Create a virtual environment:
 ```bash
@@ -61,6 +36,9 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+
+
+
 - Optionally allows export (JSON or CSV).
 d. Polish: Add error handling (“variant not found”) and a clean README.
 Deploy with link in README
@@ -69,3 +47,12 @@ README.md including:
         - Example commands and screenshots
         - Brief explanation of your data model or visualization logic
         - Bonus features (if implemented)
+
+
+README.md including:
+        - Which APIs you used or mocked - Favor API GET Variant and GTX
+        - Example commands and screenshots
+        - Brief explanation of your data model or visualization logic - go from 🌍 Global Population Allele Frequencies
+to 🧬 Functional Annotation Landscape to 🔬 eQTL Effect Heatmap, what's pattern here? More narrowing?
+        - Bonus features are the Help tab, the export option, 
+
