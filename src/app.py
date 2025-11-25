@@ -3,13 +3,12 @@ import pandas as pd
 import plotly.express as px
 import sys
 from pathlib import Path
-
+sys.path.insert(0, str(Path(__file__).parent))
 from data_viz import create_population_frequency_chart, create_eqtl_heatmap, create_functional_annotation_landscape
 from fetch_data import fetch_favor, fetch_gtex
 from merge_api import merge_variant_data, export_to_json, export_to_csv
 
 
-sys.path.insert(0, str(Path(__file__).parent))
 
 st.set_page_config(layout="wide")
 
@@ -43,7 +42,7 @@ st.title("🧬 Genetic Variant Explorer")
 tab1, tab2 = st.tabs(["🔍 Search", "❓ Help"])
 
 with tab1:
-    st.write("Search for a variant (rsID) using the FAVOR, GTEx and AlphaGenome APIs")
+    st.write("Search for a variant and recieve data vizualisations from the FAVOR and GTEx databases.")
 
     variant_id = st.text_input("Enter rsID (e.g., rs429358):", "rs429358")
 

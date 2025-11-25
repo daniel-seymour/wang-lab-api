@@ -1,5 +1,4 @@
 from typing import Optional, Dict, Any
-
 import requests
 import streamlit as st
 
@@ -24,10 +23,6 @@ def fetch_favor(variant_id: str) -> Optional[Dict[str, Any]]:
     except Exception as e:
         st.error(f"FAVOR API error: {e}")
         return {"error": str(e)}
-
-GTEX_BASE = "https://gtexportal.org/api/v2"
-
-import streamlit as st
 
 GTEX_BASE = "https://gtexportal.org/api/v2"
 
