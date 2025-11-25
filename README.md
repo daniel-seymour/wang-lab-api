@@ -18,7 +18,7 @@ Aggregates 50+ annotation tracks including pathogenicity predictors, conservatio
 
 **Key fields returned:** CADD, SIFT, PolyPhen2, AlphaMissense, ClinVar significance, gnomAD population frequencies
 
-**Source:** [Harvard/Washington University](https://favor.genohub.org/)
+**Source:** [Harvard T.H Chan School of Public Health](https://favor.genohub.org/)
 
 ---
 
@@ -30,11 +30,14 @@ Expression quantitative trait loci (eQTL) data across 54 human tissues from ~1,0
 | `https://gtexportal.org/api/v2/dataset/variant` | GET | Convert rsID → GTEx variantId |
 | `https://gtexportal.org/api/v2/association/singleTissueEqtl` | GET | Fetch eQTL associations |
 
-**Query flow:**
-1. `?snpId={rsid}&datasetId=gtex_v8` → returns `variantId`
-2. `?variantId={id}&datasetId=gtex_v8` → returns tissue-specific eQTL effects
+**Source:** [Broad Institute of MIT and Harvard](https://gtexportal.org/home/aboutAdultGtex)
 
-The motivation for tjevisualizations logic is due to the natural sequence of steps startnig at Population Frequencies, going to Pathogenicity Scores and finally eQTL Effects.
+Visualisations
+1. Global Population Allele Frequencies
+2. Functional Annotation Landscape
+3. eQTL Heatmap
+
+The motivation for these visualizations is to follow a logical progression from descriptive epidemiology to predicted function and finally to empirical mechanism.
 
 ### How to start once the repo is cloned
 

@@ -5,5 +5,3 @@ requests
 pandas
 plotly
 pytest
-python-dotenv
-alphagenome
