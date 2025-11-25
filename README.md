@@ -52,3 +52,9 @@ streamlit run src/app.py
 ```bash
 pytest -v
 ```
+
+## Further Opportunities
+1. Interviewing geneticists to find the most useful data visualizations for them. This would allow me to create a novel tool for science.
+2. Sense-checking the data visualizations by building more domain expertise
+3. Adding the Deepmind AlphaGenome API to give variant scoring as an additional datapoint as the state of the art model.
+
