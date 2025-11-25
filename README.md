@@ -36,9 +36,6 @@ Expression quantitative trait loci (eQTL) data across 54 human tissues from ~1,0
 
 The motivation for tjevisualizations logic is due to the natural sequence of steps startnig at Population Frequencies, going to Pathogenicity Scores and finally eQTL Effects.
 
-
-### How to openly flight in Russia
-
 ### How to start once the repo is cloned
 
 ```bash
