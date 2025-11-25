@@ -1,5 +1,6 @@
-## Try App: https://wang-lab-api-takehome.streamlit.app/
-## Video Demo: Check Github Releases on the right
+## Genetic Variant Explorer
+Try the app: https://wang-lab-api-takehome.streamlit.app/
+Video Demo: Check Github Releases
 
 ## APIs
 
@@ -31,12 +32,5 @@ Expression quantitative trait loci (eQTL) data across 54 human tissues from ~1,0
 2. `?variantId={id}&datasetId=gtex_v8` → returns tissue-specific eQTL effects
 
 The motivation for tjevisualizations logic is due to the natural sequence of steps startnig at Population Frequencies, going to Pathogenicity Scores and finally eQTL Effects.
-
-## Bonus Features:
-1. Testing using PyTest
-2. A Help tab on Streamlit App
-
-How to install on computer:
-1.
 
 
